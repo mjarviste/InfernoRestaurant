@@ -1,4 +1,4 @@
-import {useRef} from 'react'
+import {useRef, useState} from 'react'
 import './theme/App.less'
 import Header from './components/Header';
 import emailjs from '@emailjs/browser';
@@ -6,6 +6,8 @@ import emailjs from '@emailjs/browser';
 const App = () => {
 
     const form = useRef();
+
+    const [showMessage, changeShowMessage] = useState(false)
   
     const sendEmail = (e) => {
       e.preventDefault();
@@ -17,6 +19,13 @@ const App = () => {
         .then(
           () => {
             console.log('SUCCESS!');
+            let messageVisible = true
+            changeShowMessage(messageVisible)
+            setTimeout(() => {
+              //let messageClosing
+              let messageHidden = false
+              changeShowMessage(messageHidden)
+            }, 3000)
           },
           (error) => {
             console.log('FAILED...', error.text);
@@ -120,7 +129,13 @@ const App = () => {
           <label>Message</label>
           <textarea name="message"></textarea>
           <input id="send-btn" type="submit" value="Send"/>
-      </form>
+          <div id="email-notification" className={showMessage ? "message-visible" : "message-hidden"}>
+            <h4>Email has been sent</h4>
+          </div>
+        </form>
+        {/* <div id="email-notification" className={showMessage ? "message-visible" : "message-hidden"}>
+          <h4>Email has been sent</h4>
+        </div> */}
       </div>
       <div id="footer">
         <div id="footer-content">

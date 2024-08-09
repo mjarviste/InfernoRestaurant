@@ -201,6 +201,32 @@
       color: goldenrod;
     }
   }
+  #email-notification {
+    position: absolute;
+    text-align: center;
+    background: #F2E5D7;
+    color: black;
+    right: 0;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 32px;
+    padding: 32px 0px;
+    width: 400px;
+    border: 1px solid black;
+    border-radius: 10px;
+    
+
+  }
+  .message-hidden {
+    display: none;
+    animation: fadeOut 0.3s forwards;
+  }
+  .message-visible {
+    animation: fadeIn 0.3s forwards;
+    display: block;
+
+  }
 }
 
 #footer {
@@ -318,6 +344,24 @@ p {
   to {color: goldenrod;}
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   html {
     font-size: 12px;
@@ -353,12 +397,15 @@ p {
     }
     #book-table-wrapper {
       padding: 3rem 5rem;
+      #email-notification {
+        width: 300px;
+      }
     }
     #footer {
       padding: 3rem 5rem;
     }
-  }
-  .btn {
-    min-width: 13rem;
+    .btn {
+      min-width: 13rem;
+    }
   }
 }
