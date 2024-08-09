@@ -1,37 +1,46 @@
-import {useRef, useState} from 'react'
+import {useRef, useState, useEffect} from 'react'
 import './theme/App.less'
 import Header from './components/Header';
 import emailjs from '@emailjs/browser';
-
+import arrowLogoUrl from './assets/golden-arrow-down.png'
+import instagramUrl from './assets/instagram-logo.png'
+import githubUrl from './assets/github-logo.png'
+import linkedInUrl from './assets/linkedin-logo.png'
 const App = () => {
 
-    const form = useRef();
+  useEffect(() => {
+    document.getElementById('arrow-down').src = arrowLogoUrl
+    document.getElementById('instagram-logo').src = instagramUrl;
+    document.getElementById('linkedin-logo').src = linkedInUrl;
+    document.getElementById('github-logo').src = githubUrl;
+  })
+  const form = useRef();
 
-    const [showMessage, changeShowMessage] = useState(false)
-  
-    const sendEmail = (e) => {
-      e.preventDefault();
-  
-      emailjs
-        .sendForm('service_pu69w7x', 'contact_form', form.current, {
-          publicKey: 'jNPMhBxb3zNKQiADm',
-        })
-        .then(
-          () => {
-            console.log('SUCCESS!');
-            let messageVisible = true
-            changeShowMessage(messageVisible)
-            setTimeout(() => {
-              //let messageClosing
-              let messageHidden = false
-              changeShowMessage(messageHidden)
-            }, 3000)
-          },
-          (error) => {
-            console.log('FAILED...', error.text);
-          },
-        );
-    };
+  const [showMessage, changeShowMessage] = useState(false)
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm('service_pu69w7x', 'contact_form', form.current, {
+        publicKey: 'jNPMhBxb3zNKQiADm',
+      })
+      .then(
+        () => {
+          console.log('SUCCESS!');
+          let messageVisible = true
+          changeShowMessage(messageVisible)
+          setTimeout(() => {
+            //let messageClosing
+            let messageHidden = false
+            changeShowMessage(messageHidden)
+          }, 3000)
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+        },
+      );
+  };
 
   const onMenuBtnClick = () => {
     const menuEl = document.querySelector('#menu-wrapper')
@@ -102,7 +111,7 @@ const App = () => {
           </div>
         </div>
         <div onClick={onMenuBtnClick} id="arrow-down-wrapper">
-          <img src="../src/assets/golden-arrow-down.png"></img>
+          <img id="arrow-down"></img>
         </div>
       </div>
       <div id="menu-wrapper">
@@ -142,13 +151,19 @@ const App = () => {
           <h5>© Code by Mihkel</h5>
           <ul>
             <li>
-              <img src="../src/assets/instagram-logo.png" className="socials-icon"></img>
+              <a href="https://www.instagram.com/mihkeljarviste" target="_blank">
+                <img id="instagram-logo" className="socials-icon"></img>
+              </a>
             </li>
             <li>
-              <img src="../src/assets/linkedin-logo.png" className="socials-icon"></img>
+              <a href="https://www.linkedin.com/in/mihkel-j%C3%A4rviste-0b3b99198/" target="_blank">
+                <img id="linkedin-logo" className="socials-icon"></img>
+              </a>
             </li>
             <li>
-              <img src="../src/assets/github-logo.png" className="socials-icon"></img>
+              <a href="https://github.com/mjarviste" target="_blank">
+                <img id="github-logo" className="socials-icon"></img>
+              </a>
             </li>
           </ul>
         </div>
